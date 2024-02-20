@@ -1,12 +1,12 @@
+import Footer from "@/app/components/Footer";
+import Header from "@/app/components/Header";
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
 import "./globals.css";
 
 const mainFont = Lato({
   subsets: ["latin"],
-  weight: "100"
+  weight: '400'
 });
 
 export const metadata: Metadata = {
@@ -21,11 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${mainFont.className} mx-auto max-w-screen-2xl`}
-      >
+      <body className={`${mainFont.className} text-black`}>
         <Header />
-        <main>{children}</main>
+        <main className="w-full bg-gray">{children}</main>
         <Footer />
       </body>
     </html>
