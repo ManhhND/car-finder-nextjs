@@ -1,6 +1,8 @@
+import { getAllCars } from "@/app/api";
+import Logo from "@/public/logo.svg";
 import { Lato } from "next/font/google";
+import Image from "next/image";
 import Link from "next/link";
-import { getAllCars } from "../api";
 import SearchBar from "./SearchBar";
 
 const logoFont = Lato({weight: '700', subsets: ['latin']})
@@ -10,16 +12,16 @@ const Header = async () => {
 
   return (
     <header className="bg-white">
-      <div
-        className={`menu-container flex max-w-screen-2xl items-center justify-between px-5 py-5 md:px-20`}
-      >
-        <Link
-          href={"/"}
-          className={`${logoFont.className} text-blue-600 text-4xl`}
-        >
-          CarFinder
+      <div className="menu-container max-w-screen-2xl flex flex-col md:flex-row items-center px-5 py-8 mobile:gap-10 mobile:py-10 mobile:px-20">
+        <Link href="/" className="md:w-2/5">
+          <Image
+          src={Logo}
+          alt="CarFinder logo"
+          className="" />
         </Link>
-        <SearchBar allCars={allCars} />
+        <div className="search relative md:w-3/5">
+          <SearchBar allCars={allCars} />
+        </div>
       </div>
     </header>
   )
