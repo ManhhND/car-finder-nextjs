@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Live Preview
 
-## Getting Started
+https://kopm-car-finder.vercel.app/
 
-First, run the development server:
+# Local setup
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Clone this repo:
+
+```
+git clone https://github.com/ffw-manh-nguyen/car-finder-nextjs.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to project:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+cd car-finder-nextjs
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Install packages (Node version used: `v20.3.1`):
 
-## Learn More
+```
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start project:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# About this project
 
-## Deploy on Vercel
+- A web app for car rental, built with Next.js, Typescript and Tailwind CSS
+- It has 4 routes:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  - Homepage `/`: displays popular cars list and all cars list with a load more button
+  - Car detail page `/car/{id}`: displays car information and a link to the official website of that car brand
+  - User login page `/login`: displays login form
+  - User register page `/register`: displays register form
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- It has a search box at page header so user can filter cars by name
+- Authentication flow: home page and car detail page are restricted, anonymous users go to these pages will be redirected to login page for authentication. If they didn't have an account yet, they can register a new one at register page. After finishing the registration, an email will be sent to user for email address verification. When user click on the link in the email, their account will be activated and ready to use, user will also be redirect back to CarFinder website.
+- Backend APIs for cars fetching, user login and user registration is being served by a Drupal site I created and hosted on [Pantheon](https://dashboard.pantheon.io/)
+- Icons brought to you by React icons library
+- Using Yup, react-hook-form libraries to handle form validation
+- Using universal-cookie library to handle cookie on client components
+
+# References
+
+- Next.js (https://nextjs.org/)
+- TypeScript (https://www.typescriptlang.org/)
+- Tailwind CSS (https://tailwindcss.com/)
+- Pantheon (https://pantheon.io/)
+- Drupal (https://drupal.org/)
+- React Icons (https://react-icons.github.io/react-icons/)
