@@ -6,7 +6,7 @@ import "./globals.css";
 
 const mainFont = Lato({
   subsets: ["latin"],
-  weight: '400'
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${mainFont.className} text-black`}>
         <Header />
-        <main className="w-full bg-gray">{children}</main>
+        {children}
         <Footer />
       </body>
     </html>

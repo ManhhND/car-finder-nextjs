@@ -12,46 +12,46 @@ export const brands = [
   {
     name: "nissan",
     website: "https://www.nissanusa.com",
-    logo: nissanLogo
+    logo: nissanLogo,
   },
   {
     name: "toyota",
     website: "https://www.toyota.com/",
-    logo: toyotaLogo
+    logo: toyotaLogo,
   },
   {
     name: "ford",
     website: "https://www.ford.com/",
-    logo: fordLogo
+    logo: fordLogo,
   },
   {
     name: "honda",
     website: "https://www.honda.com/",
-    logo: hondaLogo
+    logo: hondaLogo,
   },
   {
     name: "chevrolet",
     website: "https://www.chevrolet.com/",
-    logo: chevroletLogo
+    logo: chevroletLogo,
   },
   {
     name: "bmw",
     website: "https://www.bmw.com/",
-    logo: bmwLogo
+    logo: bmwLogo,
   },
   {
     name: "mercedes",
     website: "https://www.mercedes-benz.com/",
-    logo: mercedesLogo
+    logo: mercedesLogo,
   },
   {
     name: "jeep",
     website: "https://www.jeep.com/",
-    logo: jeepLogo
+    logo: jeepLogo,
   },
   {
     name: "tesla",
     website: "https://www.tesla.com/",
-    logo: teslaLogo
+    logo: teslaLogo,
   },
 ];

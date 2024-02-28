@@ -1,5 +1,5 @@
-import Logo from "@/public/logo.svg"
-import Image from "next/image"
+import Logo from "@/public/logo.svg";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -7,10 +7,7 @@ const Footer = () => {
       <footer className="mobile:p-4 p-16 bg-white w-full">
         <div className="row-1 min-h-60 mb-8 flex border-b border-gray-3 text-gray-2 mobile:flex-col mobile:pb-8 mobile:gap-8">
           <div className="left-col flex-auto md:w-3/4">
-            <Image
-            src={Logo}
-            alt="CarFinder logo"
-            className="mb-6" />
+            <Image src={Logo} alt="CarFinder logo" className="mb-6" />
             <p>Our vision is to provide convenience and</p>
             <p>help increase your sales business.</p>
           </div>
@@ -31,7 +28,7 @@ const Footer = () => {
         </div>
       </footer>
     </>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
