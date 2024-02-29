@@ -40,7 +40,6 @@ const Register = () => {
       const res = await userRegister({ username, email, password });
       if (!res.message) {
         setRegisterSuccess(true);
-        console.log(res);
       } else {
         setSubmitError(res.message);
       }
@@ -54,7 +53,7 @@ const Register = () => {
   return (
     <>
       {!registerSuccess ? (
-        <div className="register-form-wrapper flex flex-col items-center justify-center gap-8 py-10">
+        <div className="register-form-wrapper bg-gray flex flex-col items-center justify-center gap-8 py-10">
           <h2 className="text-3xl md:text-5xl font-black">Creat new account</h2>
           <form
             className="flex w-[20rem] flex-col space-y-10"
