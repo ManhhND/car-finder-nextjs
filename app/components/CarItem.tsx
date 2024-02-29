@@ -1,4 +1,5 @@
 import { Car } from "@/app/utils/interfaces";
+import { useGlobalContext } from "@/context/globalContext";
 import gasSVG from "@/public/gas-station.svg";
 import heartSVG from "@/public/heart.svg";
 import outlinedHeartSVG from "@/public/outlined-heart.svg";
@@ -6,25 +7,23 @@ import peopleSVG from "@/public/profile-2user.svg";
 import steeringSVG from "@/public/steering.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 const CarItem = ({
   nid,
   title,
+  field_description,
   field_car_type,
   field_capacity,
   field_steering,
   field_gasoline,
   field_image,
   field_price,
+  field_brand,
+  field_favorite,
   listTitle,
 }: Car & { listTitle: string }) => {
-  const [favorite, setFavorite] = useState<boolean>(false);
+  const { updateFavorite } = useGlobalContext();
   field_image = field_image.trim().replace("/\n/g", "");
-
-  const handleFavorite = () => {
-    setFavorite(!favorite);
-  };
 
   return (
     <>
@@ -35,12 +34,12 @@ const CarItem = ({
             <input
               type="checkbox"
               id={`${listTitle} ${title}`}
-              onChange={handleFavorite}
+              onChange={() => updateFavorite(nid)}
               className="hidden"
             />
             <label htmlFor={`${listTitle} ${title}`} className="cursor-pointer">
               <Image
-                src={favorite ? heartSVG : outlinedHeartSVG}
+                src={field_favorite ? heartSVG : outlinedHeartSVG}
                 alt="favorite"
               />
             </label>

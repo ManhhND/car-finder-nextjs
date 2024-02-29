@@ -25,11 +25,16 @@ const AuthSection = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
       <PiUserCircle size={24} onClick={toggleAuthSection} className="user" />
       <div className="action hidden group-hover:block absolute z-10 bg-white md:border border-gray shadow-md shadow-gray-3">
         {isLoggedIn ? (
-          <div
-            className="cursor-pointer py-2 px-4 hover:underline"
-            onClick={handleLogout}
-          >
-            Logout
+          <div className="link-action flex flex-col">
+            <Link href="/favorite-cars" className="py-2 px-4 hover:underline">
+              My favorites
+            </Link>
+            <div
+              className="cursor-pointer py-2 px-4 hover:underline"
+              onClick={handleLogout}
+            >
+              Logout
+            </div>
           </div>
         ) : (
           <div className="link-action flex flex-col">
