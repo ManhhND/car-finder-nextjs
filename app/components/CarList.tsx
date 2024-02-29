@@ -1,22 +1,49 @@
 "use client";
 
-import { Car } from "@/app/utils/interfaces";
+import { useGlobalContext } from "@/context/globalContext";
 import { useEffect, useState } from "react";
-import { getCarList } from "../api";
+import { Car } from "../utils/interfaces";
 import CarItem from "./CarItem";
 
 const CarList = ({
   listTitle,
-  carItems,
-  numberOfPages,
+  hasPager,
+  listType,
 }: {
   listTitle: string;
-  carItems: Car[];
-  numberOfPages?: number;
+  hasPager: boolean;
+  listType?: string;
 }) => {
-  const [cars, setCars] = useState<Car[]>(carItems);
+  const itemsOnFirstPage = 8;
+  const itemsPerPage = 4;
+  const { allCars, pagerList, setPagerList, list, setList } =
+    useGlobalContext();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [cars, setCars] = useState<Car[]>([]);
+  const totalPages = Math.round(
+    (allCars.length - itemsOnFirstPage) / itemsPerPage,
+  );
+
+  useEffect(() => {
+    if (hasPager) {
+      setPagerList(
+        allCars.slice(0, itemsOnFirstPage + itemsPerPage * currentPage),
+      );
+    } else {
+      if (listType === "favorite") {
+        setList(allCars.filter((car) => car.field_favorite === true));
+      } else {
+        setList(
+          allCars.filter((car) => car.field_popular.toLowerCase() === "true"),
+        );
+      }
+    }
+  }, [allCars]);
+
+  useEffect(() => {
+    hasPager ? setCars(pagerList) : setCars(list);
+  }, [pagerList, list]);
 
   const handleLoadMore = async () => {
     setIsLoading(true);
@@ -26,28 +53,28 @@ const CarList = ({
   };
 
   useEffect(() => {
-    const startFetching = async () => {
-      const newCars = await getCarList({
-        page: currentPage,
-      });
-      setCars([...cars, ...newCars]);
-    };
     if (currentPage > 0) {
-      startFetching();
+      setPagerList(
+        allCars.slice(0, itemsOnFirstPage + itemsPerPage * currentPage),
+      );
     }
   }, [currentPage]);
 
   return (
     <section>
       <h1 className="mb-5 text-gray-2 font-semibold">{listTitle}</h1>
-      <div className="movie-list grid grid-flow-row justify-items-center gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mb-16">
-        {cars.map((car) => {
-          return (
-            <CarItem key={`car-${car.nid}`} {...car} listTitle={listTitle} />
-          );
-        })}
-      </div>
-      {numberOfPages && currentPage < numberOfPages && (
+      {cars.length ? (
+        <div className="movie-list grid grid-flow-row justify-items-center gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mb-16">
+          {cars.map((car) => {
+            return (
+              <CarItem key={`car-${car.nid}`} {...car} listTitle={listTitle} />
+            );
+          })}
+        </div>
+      ) : (
+        <div className="italic">Oops! There&apos;s no car...</div>
+      )}
+      {hasPager && currentPage < totalPages && (
         <button
           onClick={handleLoadMore}
           type="button"
