@@ -9,4 +9,6 @@ export interface Car {
   field_image: string;
   field_price: number;
   field_brand: string;
+  field_favorite: boolean;
+  field_popular: string;
 }
