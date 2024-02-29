@@ -1,21 +1,35 @@
+"use client";
+
+import { useGlobalContext } from "@/context/globalContext";
+import { useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import { getAllCars, getCarList, getPopularCars } from "./api";
+import { getAllCars } from "./api";
 import CarList from "./components/CarList";
 import HeroBanner from "./components/HeroBanner";
+import { Car } from "./utils/interfaces";
 
-const Home = async ({
+const Home = ({
   searchParams,
 }: {
   searchParams?: { [key: string]: string };
 }) => {
+  const { allCars, setAllCars } = useGlobalContext();
   const accountActivated = searchParams && searchParams.activated === "1";
 
-  const allCars = await getAllCars();
-  const carList = await getCarList({
-    page: 0,
-  });
-  const numberOfPages = Math.round((allCars.length - carList.length) / 4);
-  const popularCars = await getPopularCars();
+  useEffect(() => {
+    const fetchData = async () => {
+      const allCars = await getAllCars();
+      setAllCars(
+        allCars.map((car: Car) => ({
+          ...car,
+          field_favorite: false,
+        })),
+      );
+    };
+    if (!allCars.length) {
+      fetchData();
+    }
+  }, []);
 
   return (
     <>
@@ -33,12 +47,12 @@ const Home = async ({
         )}
         <HeroBanner />
         <div className="flex flex-col mobile:p-4 p-16">
-          <CarList listTitle="Popular Cars" carItems={popularCars} />
           <CarList
-            listTitle="All Cars"
-            carItems={carList}
-            numberOfPages={numberOfPages}
+            listTitle="Popular Cars"
+            hasPager={false}
+            listType="popular"
           />
+          <CarList listTitle="All Cars" hasPager={true} listType="all" />
         </div>
       </main>
     </>
