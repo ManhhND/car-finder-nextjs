@@ -4,17 +4,23 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaCheckCircle } from "react-icons/fa";
 import Cookies from "universal-cookie";
 import * as Yup from "yup";
 import { userLogIn } from "../api";
 
-const Login = () => {
+const Login = ({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string };
+}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [submitError, setSubmitError] = useState("");
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
   const cookies = new Cookies();
+  const accountActivated = searchParams && searchParams.activated === "1";
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -48,6 +54,17 @@ const Login = () => {
   return (
     <>
       <div className="login-form-wrapper bg-gray flex flex-col items-center justify-center gap-8 py-10">
+        {accountActivated && (
+          <section className="message flex gap-4 p-4">
+            <div className="message-header flex justify-center">
+              <FaCheckCircle size={24} style={{ color: "green" }} />
+            </div>
+            <div className="message-content text-center">
+              Your account has been activated! You are now able to log in using
+              your credentials.
+            </div>
+          </section>
+        )}
         <h2 className="text-5xl font-black">Log in</h2>
         <form
           className="flex w-[20rem] flex-col space-y-10"
