@@ -1,7 +1,6 @@
-import Logo from "@/public/logo.svg";
+import LogoSVG from "@/public/logo.svg";
 import { Lato } from "next/font/google";
 import { cookies } from "next/headers";
-import Image from "next/image";
 import Link from "next/link";
 import { getAllCars } from "../api";
 import AuthSection from "./AuthSection";
@@ -18,7 +17,7 @@ const Header = async () => {
     <header className="bg-white">
       <div className="menu-container flex flex-col md:flex-row items-center px-5 py-8 mobile:gap-10 mobile:py-10 mobile:px-20">
         <Link href="/" className="md:w-2/5">
-          <Image src={Logo} alt="CarFinder logo" className="" />
+          <LogoSVG alt="CarFinder logo" />
         </Link>
         <div className="search relative md:w-2/5">
           <SearchBar data={allCars} />

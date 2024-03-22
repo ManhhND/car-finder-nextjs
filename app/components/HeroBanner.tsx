@@ -1,7 +1,5 @@
 "use client";
 
-import Banner from "@/public/banner.svg";
-import mobileBanner from "@/public/hero-banner-mobile.svg";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -25,12 +23,14 @@ const HeroBanner = () => {
   return (
     <section className="hero-banner">
       <div className="hero-container relative">
-        <picture></picture>
         <Image
-          src={width > 767 ? Banner : mobileBanner}
+          src={width > 767 ? "/banner.svg" : "/hero-banner-mobile.svg"}
           alt="CarFinder banner"
           sizes="100vw"
           className="w-full"
+          width={1438}
+          height={505}
+          data-testid="hero-image"
         />
         <div className="info-text text-white absolute mobile:items-center top-0 pt-10 mobile:w-screen mobile:h-full md:left-10 lg:top-20 lg:left-20 xl:top-28 flex flex-col gap-8">
           <h1 className="text-2xl lg:text-4xl font-bold">

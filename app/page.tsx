@@ -1,29 +1,31 @@
 "use client";
 
-import { useGlobalContext } from "@/context/globalContext";
-import { useEffect } from "react";
-import { getAllCars } from "./api";
+import { useCarContext } from "@/context/CarContext";
+import { useState } from "react";
 import CarList from "./components/CarList";
 import HeroBanner from "./components/HeroBanner";
-import { Car } from "./utils/interfaces";
+
+const itemsOnFirstPage = 8;
+const itemsPerPage = 4;
 
 const Home = () => {
-  const { allCars, setAllCars } = useGlobalContext();
+  const { allCars } = useCarContext();
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const allCars = await getAllCars();
-      setAllCars(
-        allCars.map((car: Car) => ({
-          ...car,
-          field_favorite: false,
-        })),
-      );
-    };
-    if (!allCars.length) {
-      fetchData();
-    }
-  }, []);
+  const popularCars = allCars.filter(
+    (car) => car.field_popular.toLowerCase() === "true",
+  );
+  const totalPages = Math.round(
+    (allCars.length - itemsOnFirstPage) / itemsPerPage,
+  );
+  const pagerList = allCars.slice(
+    0,
+    itemsOnFirstPage + itemsPerPage * currentPage,
+  );
+
+  const handleLoadMore = () => {
+    setCurrentPage(currentPage + 1);
+  };
 
   return (
     <>
@@ -32,10 +34,20 @@ const Home = () => {
         <div className="flex flex-col mobile:p-4 p-16">
           <CarList
             listTitle="Popular Cars"
+            data={popularCars}
             hasPager={false}
-            listType="popular"
+            totalPages={1}
+            currentPage={currentPage}
+            onLoadMore={handleLoadMore}
           />
-          <CarList listTitle="All Cars" hasPager={true} listType="all" />
+          <CarList
+            listTitle="All Cars"
+            data={pagerList}
+            hasPager={true}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onLoadMore={handleLoadMore}
+          />
         </div>
       </main>
     </>
