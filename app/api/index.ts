@@ -1,36 +1,29 @@
-const BASE_URL = "https://dev-kopm.pantheonsite.io";
-const API_BASE_URL = "https://dev-kopm.pantheonsite.io/api";
+import { LogInData } from "../login/page";
+import { RegisterData } from "../register/page";
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const getAllCars = async () => {
-  const endpoint = `${API_BASE_URL}/cars/all?_format=json`;
+  const endpoint = `${apiBaseUrl}/cars/all?_format=json`;
   const res = await fetch(endpoint, { next: { revalidate: 3600 } });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+  if (res.status !== 200) {
+    return [];
   }
-
   return res.json();
 };
 
 export const getCarDetail = async ({ id }: { id: string }) => {
-  const endpoint = `${API_BASE_URL}/car/${id}?_format=json`;
+  const endpoint = `${apiBaseUrl}/car/${id}?_format=json`;
   const res = await fetch(endpoint, { next: { revalidate: 3600 } });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+  if (res.status !== 200) {
+    return [];
   }
-
   return res.json();
 };
 
-export const userLogIn = async ({
-  username,
-  password,
-}: {
-  username: string;
-  password: string;
-}) => {
-  const endpoint = `${BASE_URL}/user/login?_format=json`;
+export const userLogIn = async ({ username, password }: LogInData) => {
+  const endpoint = `${baseUrl}/user/login?_format=json`;
 
   const res = await fetch(endpoint, {
     method: "POST",
@@ -47,12 +40,8 @@ export const userRegister = async ({
   email,
   username,
   password,
-}: {
-  email: string;
-  username: string;
-  password: string;
-}) => {
-  const endpoint = `${BASE_URL}/user/registerpass?_format=json`;
+}: RegisterData) => {
+  const endpoint = `${baseUrl}/user/registerpass?_format=json`;
   const res = await fetch(endpoint, {
     method: "POST",
     body: JSON.stringify({
