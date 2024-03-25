@@ -37,17 +37,13 @@ const Login = ({
   const { errors, isSubmitting } = formState;
 
   const handleLogin = async (data: LogInData) => {
-    try {
-      const res = await userLogIn(data);
-      if (!res.message) {
-        cookies.set("csrf-token", `${res.csrf_token}`);
-        router.push("/");
-        router.refresh();
-      } else {
-        setSubmitError(res.message);
-      }
-    } catch (error) {
-      console.log("[User login] error => ", error);
+    const res = await userLogIn(data);
+    if (!res.message) {
+      cookies.set("csrf-token", `${res.csrf_token}`);
+      router.push("/");
+      router.refresh();
+    } else {
+      setSubmitError(res.message);
     }
   };
 

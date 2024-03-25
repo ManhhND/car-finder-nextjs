@@ -55,7 +55,7 @@ const SearchBar = ({ data }: { data: Car[] }) => {
       </div>
       {searching && searchKeyword && filteredCars.length !== 0 && (
         <div className="absolute z-10">
-          <div className="flex flex-col gap-4 bg-gray p-2 shadow-lg shadow-black">
+          <ul className="flex flex-col gap-4 bg-gray p-2 shadow-lg shadow-black">
             {filteredCars.map((car) => (
               <CarSearchItem
                 key={`car-${car.nid}`}
@@ -63,7 +63,7 @@ const SearchBar = ({ data }: { data: Car[] }) => {
                 onStopSearching={stopSearching}
               />
             ))}
-          </div>
+          </ul>
         </div>
       )}
     </>

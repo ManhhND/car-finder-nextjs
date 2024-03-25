@@ -15,10 +15,8 @@ export const getAllCars = async () => {
 
 export const getCarDetail = async ({ id }: { id: string }) => {
   const endpoint = `${apiBaseUrl}/car/${id}?_format=json`;
-  const res = await fetch(endpoint, { next: { revalidate: 3600 } });
-  if (res.status !== 200) {
-    return [];
-  }
+  const res = await fetch(endpoint, { next: { revalidate: 1 } });
+
   return res.json();
 };
 

@@ -12,7 +12,7 @@ const CarSearchItem = ({ car, onStopSearching }: CarSearchItemProps) => {
 
   return (
     <>
-      <li className="list-none bg-white p-4">
+      <li className="list-none bg-white p-4" data-testid="search-item">
         <Link
           href={`/car/${car.nid}`}
           className="flex items-center gap-8"
