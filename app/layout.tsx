@@ -1,6 +1,6 @@
 import Footer from "@/app/components/Footer";
 import Header from "@/app/components/Header";
-import { GlobalContextProvider } from "@/context/globalContext";
+import { CarContextProvider } from "@/context/CarContext";
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
@@ -23,11 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${mainFont.className} text-black`}>
-        <GlobalContextProvider>
+        <CarContextProvider>
           <Header />
           {children}
           <Footer />
-        </GlobalContextProvider>
+        </CarContextProvider>
       </body>
     </html>
   );

@@ -6,7 +6,11 @@ import { useState } from "react";
 import { PiUserCircle } from "react-icons/pi";
 import Cookies from "universal-cookie";
 
-const AuthSection = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
+interface AuthSectionProps {
+  isLoggedIn: boolean;
+}
+
+const AuthSection = ({ isLoggedIn }: AuthSectionProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
   const cookies = new Cookies();

@@ -9,15 +9,17 @@ import Cookies from "universal-cookie";
 import * as Yup from "yup";
 import { userLogIn } from "../api";
 
+export interface LogInData {
+  username: string;
+  password: string;
+}
+
 const Login = ({
   searchParams,
 }: {
   searchParams?: { [key: string]: string };
 }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [submitError, setSubmitError] = useState("");
-  const [isLoading, setLoading] = useState(false);
   const router = useRouter();
   const cookies = new Cookies();
   const accountActivated = searchParams && searchParams.activated === "1";
@@ -30,24 +32,18 @@ const Login = ({
   const formOptions = { resolver: yupResolver(validationSchema) };
 
   // get functions to build form with useForm() hook
-  const { register, handleSubmit, reset, formState } = useForm(formOptions);
-  const { errors } = formState;
+  const { register, handleSubmit, reset, formState } =
+    useForm<LogInData>(formOptions);
+  const { errors, isSubmitting } = formState;
 
-  const handleLogin = async () => {
-    setLoading(true);
-    try {
-      const res = await userLogIn({ username, password });
-      if (!res.message) {
-        cookies.set("csrf-token", `${res.csrf_token}`);
-        router.push("/");
-        router.refresh();
-      } else {
-        setSubmitError(res.message);
-      }
-    } catch (error) {
-      console.log("[User login] error => ", error);
-    } finally {
-      setLoading(false);
+  const handleLogin = async (data: LogInData) => {
+    const res = await userLogIn(data);
+    if (!res.message) {
+      cookies.set("csrf-token", `${res.csrf_token}`);
+      router.push("/");
+      router.refresh();
+    } else {
+      setSubmitError(res.message);
     }
   };
 
@@ -79,14 +75,13 @@ const Login = ({
               name="username"
               id="username"
               placeholder="Username"
-              value={username}
-              onInput={(e) => setUsername(e.currentTarget.value)}
+              defaultValue=""
               autoFocus
             />
           </div>
           {errors.username && (
             <span className="italic text-red-400">
-              {errors.username?.message}
+              {errors.username.message}
             </span>
           )}
           <div className="w-full transform border-b bg-transparent text-lg duration-300 focus-within:border-slate-500">
@@ -97,22 +92,21 @@ const Login = ({
               type="password"
               id="password"
               placeholder="Password"
-              value={password}
-              onInput={(e) => setPassword(e.currentTarget.value)}
+              defaultValue=""
             />
           </div>
           {errors.password && (
             <span className="italic text-red-400">
-              {errors.password?.message}
+              {errors.password.message}
             </span>
           )}
           <button
             type="submit"
             className="relative text-white inset-0 bg-blue py-2 font-bold"
-            disabled={isLoading}
+            disabled={isSubmitting}
             title="Login"
           >
-            {isLoading ? "LOGGING IN..." : "LOG IN"}
+            {isSubmitting ? "LOGGING IN..." : "LOG IN"}
           </button>
           <span className="italic text-red-400">{submitError}</span>
         </form>

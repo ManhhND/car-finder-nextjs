@@ -1,43 +1,36 @@
 "use client";
 
+import { getAllCars } from "@/app/api";
 import { Car } from "@/app/utils/interfaces";
 import {
   Dispatch,
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
 
-const defaultValues: {
+interface CarContextProps {
   allCars: Car[];
   setAllCars: Dispatch<SetStateAction<Car[]>>;
-  list: Car[];
-  setList: Dispatch<SetStateAction<Car[]>>;
-  pagerList: Car[];
-  setPagerList: Dispatch<SetStateAction<Car[]>>;
   updateFavorite: (carId: number) => void;
-} = {
+}
+
+const defaultValues: CarContextProps = {
   allCars: [],
   setAllCars: () => {},
-  list: [],
-  setList: () => {},
-  pagerList: [],
-  setPagerList: () => {},
-  updateFavorite: (carId: number) => {},
+  updateFavorite: () => {},
 };
 
-const GlobalContext = createContext(defaultValues);
+export const CarContext = createContext<CarContextProps>(defaultValues);
 
-export const GlobalContextProvider = ({
+export const CarContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
   const [allCars, setAllCars] = useState<Car[]>([]);
-  const [list, setList] = useState<Car[]>([]);
-  const [pagerList, setPagerList] = useState<Car[]>([]);
-  const favorite = false;
 
   const updateFavorite = (carId: number) => {
     const updatedCars = allCars.map((car) =>
@@ -51,21 +44,32 @@ export const GlobalContextProvider = ({
     setAllCars(updatedCars);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const allCars = await getAllCars();
+      setAllCars(
+        allCars.map((car: Car) => ({
+          ...car,
+          field_favorite: false,
+        })),
+      );
+    };
+    if (!allCars.length) {
+      fetchData();
+    }
+  }, []);
+
   return (
-    <GlobalContext.Provider
+    <CarContext.Provider
       value={{
         allCars,
         setAllCars,
-        list,
-        setList,
-        pagerList,
-        setPagerList,
         updateFavorite,
       }}
     >
       {children}
-    </GlobalContext.Provider>
+    </CarContext.Provider>
   );
 };
 
-export const useGlobalContext = () => useContext(GlobalContext);
+export const useCarContext = () => useContext(CarContext);
