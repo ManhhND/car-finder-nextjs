@@ -1,57 +1,47 @@
-import bmwLogo from "@/public/bmw-logo.svg";
-import chevroletLogo from "@/public/chevrolet-logo.svg";
-import fordLogo from "@/public/ford-logo.svg";
-import hondaLogo from "@/public/honda-logo.svg";
-import jeepLogo from "@/public/jeep-logo.svg";
-import mercedesLogo from "@/public/mercedes-logo.svg";
-import nissanLogo from "@/public/nissan-logo.svg";
-import teslaLogo from "@/public/tesla-logo.svg";
-import toyotaLogo from "@/public/toyota-logo.svg";
-
 export const brands = [
   {
     name: "nissan",
     website: "https://www.nissanusa.com",
-    logo: nissanLogo,
+    logo: "/nissan-logo.svg",
   },
   {
     name: "toyota",
     website: "https://www.toyota.com/",
-    logo: toyotaLogo,
+    logo: "/toyota-logo.svg",
   },
   {
     name: "ford",
     website: "https://www.ford.com/",
-    logo: fordLogo,
+    logo: "/ford-logo.svg",
   },
   {
     name: "honda",
     website: "https://www.honda.com/",
-    logo: hondaLogo,
+    logo: "/honda-logo.svg",
   },
   {
     name: "chevrolet",
     website: "https://www.chevrolet.com/",
-    logo: chevroletLogo,
+    logo: "/chevroletLogo-logo.svg",
   },
   {
     name: "bmw",
     website: "https://www.bmw.com/",
-    logo: bmwLogo,
+    logo: "/bmw-logo.svg",
   },
   {
     name: "mercedes",
     website: "https://www.mercedes-benz.com/",
-    logo: mercedesLogo,
+    logo: "/mercedes-logo.svg",
   },
   {
     name: "jeep",
     website: "https://www.jeep.com/",
-    logo: jeepLogo,
+    logo: "/jeep-logo.svg",
   },
   {
     name: "tesla",
     website: "https://www.tesla.com/",
-    logo: teslaLogo,
+    logo: "/tesla-logo.svg",
   },
 ];
