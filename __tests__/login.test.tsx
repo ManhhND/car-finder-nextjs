@@ -12,6 +12,10 @@ jest.mock("next/navigation", () => ({
   },
 }));
 
+jest.mock("@/app/api", () => ({
+  userLogIn: () => jest.fn(),
+}));
+
 describe("Login page", () => {
   beforeEach(() => {
     global.fetch = jest.fn(() =>
