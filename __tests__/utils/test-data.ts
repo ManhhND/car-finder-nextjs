@@ -445,3 +445,13 @@ export const car: Car = {
   field_popular: "False",
   field_favorite: false,
 };
+
+export const user = {
+  current_user: {
+    uid: "1",
+    roles: ["authenticated", "administrator"],
+    name: "admin",
+  },
+  csrf_token: "brPxm92SYCldGd_WWFYwjSAUiGqN2I_0i0F2KSQY5Mw",
+  logout_token: "mWq2DvTLRJ5FqOU1eWnTcWbQoXA46kJvA_2711XXbEM",
+};

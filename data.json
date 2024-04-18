@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "name": "Toyota Camry",
+    "description": "A reliable midsize sedan with comfortable interiors and advanced safety features.",
+    "category": "Sedan",
+    "capacity": 5,
+    "steering": "Power",
+    "gasoline": true,
+    "image": "toyota_camry.jpg",
+    "price": 25000
+  },
+  {
+    "id": 2,
+    "name": "Honda Civic",
+    "description": "A compact car known for its fuel efficiency and sporty design.",
+    "category": "Sedan",
+    "capacity": 5,
+    "steering": "Power",
+    "gasoline": true,
+    "image": "honda_civic.jpg",
+    "price": 22000
+  },
+  {
+    "id": 3,
+    "name": "Ford F-150",
+    "description": "A rugged and powerful pickup truck suitable for both work and leisure.",
+    "category": "Truck",
+    "capacity": 5,
+    "steering": "Power",
+    "gasoline": true,
+    "image": "ford_f150.jpg",
+    "price": 35000
+  },
+  {
+    "id": 4,
+    "name": "Chevrolet Silverado",
+    "description": "A versatile full-size pickup truck with a spacious cabin and strong towing capabilities.",
+    "category": "Truck",
+    "capacity": 6,
+    "steering": "Power",
+    "gasoline": true,
+    "image": "chevrolet_silverado.jpg",
+    "price": 38000
+  },
+  {
+    "id": 5,
+    "name": "BMW 3 Series",
+    "description": "A luxury compact sedan offering excellent performance and upscale amenities.",
+    "category": "Luxury",
+    "capacity": 5,
+    "steering": "Power",
+    "gasoline": true,
+    "image": "bmw_3_series.jpg",
+    "price": 40000
+  },
+  {
+    "id": 6,
+    "name": "Mercedes-Benz E-Class",
+    "description": "A prestigious executive sedan renowned for its refined interior and advanced technology.",
+    "category": "Luxury",
+    "capacity": 5,
+    "steering": "Power",
+    "gasoline": true,
+    "image": "mercedes_e_class.jpg",
+    "price": 55000
+  },
+  {
+    "id": 7,
+    "name": "Tesla Model S",
+    "description": "An electric luxury sedan with cutting-edge technology and impressive performance.",
+    "category": "Electric",
+    "capacity": 5,
+    "steering": "Power",
+    "gasoline": false,
+    "image": "tesla_model_s.jpg",
+    "price": 80000
+  },
+  {
+    "id": 8,
+    "name": "Toyota Prius",
+    "description": "A popular hybrid car known for its exceptional fuel efficiency and eco-friendly credentials.",
+    "category": "Hybrid",
+    "capacity": 5,
+    "steering": "Power",
+    "gasoline": true,
+    "image": "toyota_prius.jpg",
+    "price": 28000
+  },
+  {
+    "id": 9,
+    "name": "Jeep Wrangler",
+    "description": "An iconic off-road SUV with rugged capabilities and a distinctive design.",
+    "category": "SUV",
+    "capacity": 4,
+    "steering": "Manual",
+    "gasoline": true,
+    "image": "jeep_wrangler.jpg",
+    "price": 32000
+  },
+  {
+    "id": 10,
+    "name": "Ford Mustang",
+    "description": "A legendary sports car with powerful engines and timeless styling.",
+    "category": "Sports Car",
+    "capacity": 4,
+    "steering": "Power",
+    "gasoline": true,
+    "image": "ford_mustang.jpg",
+    "price": 45000
+  },
+  {
+    "id": 11,
+    "name": "Chevrolet Malibu",
+    "description": "A midsize sedan offering a comfortable ride and modern technology features.",
+    "category": "Sedan",
+    "capacity": 5,
+    "steering": "Power Steering",
+    "gasoline": true,
+    "image": "chevrolet_malibu.jpg",
+    "price": 25000
+  },
+  {
+    "id": 12,
+    "name": "Toyota Corolla",
+    "description": "A compact car known for its reliability and fuel efficiency.",
+    "category": "Sedan",
+    "capacity": 5,
+    "steering": "Power Steering",
+    "gasoline": true,
+    "image": "toyota_corolla.jpg",
+    "price": 20000
+  },
+  {
+    "id": 13,
+    "name": "Toyota RAV4",
+    "description": "Versatile SUV with spacious interior and off-road capabilities.",
+    "category": "SUV",
+    "capacity": 5,
+    "steering": "Power Steering",
+    "gasoline": true,
+    "image": "toyota_rav4.jpg",
+    "price": 30000
+  },
+  {
+    "id": 14,
+    "name": "Chevrolet Suburban",
+    "description": "Large SUV with ample space for passengers and cargo.",
+    "category": "SUV",
+    "capacity": 8,
+    "steering": "Power Steering",
+    "gasoline": true,
+    "image": "chevrolet_suburban.jpg",
+    "price": 50000
+  },
+  {
+    "id": 15,
+    "name": "Nissan Rogue",
+    "description": "A compact SUV with comfortable seating and advanced safety technology.",
+    "category": "SUV",
+    "capacity": 5,
+    "steering": "Power Steering",
+    "gasoline": true,
+    "image": "nissan_rogue.jpg",
+    "price": 30000
+  },
+  {
+    "id": 16,
+    "name": "Honda Accord",
+    "description": "A stylish and comfortable sedan known for its smooth ride and spacious interior.",
+    "category": "Sedan",
+    "capacity": 5,
+    "steering": "Power Steering",
+    "gasoline": true,
+    "image": "honda_accord.jpg",
+    "price": 28000
+  },
+  {
+    "id": 17,
+    "name": "Nissan Leaf",
+    "description": "An electric hatchback with a spacious interior and zero-emission driving.",
+    "category": "Electric",
+    "capacity": 5,
+    "steering": "Electric Power Steering",
+    "gasoline": false,
+    "image": "https://libertywalk.co.jp/wp-content/uploads/2022/11/LB-WORKS-NISSAN-GT-R-R35-type-1-00002.jpg",
+    "price": 40000
+  },
+  {
+    "id": 18,
+    "name": "Ford Explorer",
+    "description": "A spacious SUV with off-road capabilities and comfortable interior.",
+    "category": "SUV",
+    "capacity": 7,
+    "steering": "Power Steering",
+    "gasoline": true,
+    "image": "ford_explorer.jpg",
+    "price": 35000
+  },
+  {
+    "id": 19,
+    "name": "Tesla Model X",
+    "description": "An electric SUV with advanced autopilot features and spacious interior.",
+    "category": "Electric SUV",
+    "capacity": 7,
+    "steering": "Electric Power Steering",
+    "gasoline": false,
+    "image": "tesla_model_x.jpg",
+    "price": 60000
+  },
+  {
+    "id": 20,
+    "name": "Chevrolet Equinox",
+    "description": "Compact SUV offering a comfortable ride and versatile cargo space.",
+    "category": "SUV",
+    "capacity": 5,
+    "steering": "Power Steering",
+    "gasoline": true,
+    "image": "chevrolet_equinox.jpg",
+    "price": 28000
+  }
+]

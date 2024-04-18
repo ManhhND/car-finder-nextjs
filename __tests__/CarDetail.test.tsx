@@ -1,3 +1,4 @@
+import { getCarDetail } from "@/app/api";
 import CarDetail from "@/app/car/[id]/page";
 import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
@@ -14,8 +15,12 @@ describe("Car detail page", () => {
   });
 
   it("successfully fetches data and renders with the correct props", async () => {
+    const car = await getCarDetail({ id: "1" });
     const resolve = await CarDetail({ params: { id: "1" } });
     render(resolve);
-    waitFor(() => expect(screen.getByText(/toyota/i)).toBeInTheDocument());
+    waitFor(() => {
+      expect(car).toStrictEqual(arrOneCar);
+      expect(screen.getByText(/toyota/i)).toBeInTheDocument();
+    });
   });
 });

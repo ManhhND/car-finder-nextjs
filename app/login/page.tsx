@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { FaCheckCircle } from "react-icons/fa";
 import Cookies from "universal-cookie";
 import * as Yup from "yup";
-import { userLogIn } from "../api";
+import { authenticate } from "../api/actions";
 
 export interface LogInData {
   username: string;
@@ -37,7 +37,7 @@ const Login = ({
   const { errors, isSubmitting } = formState;
 
   const handleLogin = async (data: LogInData) => {
-    const res = await userLogIn(data);
+    const res = await authenticate(data);
     if (!res.message) {
       cookies.set("csrf-token", `${res.csrf_token}`);
       router.push("/");
@@ -79,7 +79,7 @@ const Login = ({
               autoFocus
             />
           </div>
-          {errors.username && (
+          {errors?.username && (
             <span className="italic text-red-400">
               {errors.username.message}
             </span>
@@ -95,7 +95,7 @@ const Login = ({
               defaultValue=""
             />
           </div>
-          {errors.password && (
+          {errors?.password && (
             <span className="italic text-red-400">
               {errors.password.message}
             </span>

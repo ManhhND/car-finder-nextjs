@@ -47,6 +47,7 @@ const Register = () => {
     } catch (error) {
       console.log("[User register] error => ", error);
     }
+    console.log(submitError);
   };
 
   return (
@@ -112,7 +113,7 @@ const Register = () => {
               type="submit"
               className="relative text-white inset-0 bg-blue py-2 font-bold"
               disabled={isSubmitting}
-              title="Login"
+              title="Submit"
             >
               {isSubmitting ? "PROCESSING..." : "CREAT ACCOUNT"}
             </button>

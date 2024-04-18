@@ -1,11 +1,10 @@
-import { userLogIn } from "@/app/api";
-import { authenticate } from "@/app/api/actions";
+import { userRegister } from "@/app/api";
 import Login from "@/app/login/page";
+import Register from "@/app/register/page";
 import "@testing-library/jest-dom";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { redirect } from "next/navigation";
-import { user } from "./utils/test-data";
 
 jest.mock("next/navigation", () => ({
   useRouter() {
@@ -14,10 +13,6 @@ jest.mock("next/navigation", () => ({
       refresh: () => jest.fn(),
     };
   },
-}));
-
-jest.mock("@/app/api", () => ({
-  userLogIn: jest.fn(),
 }));
 
 describe("Login page", () => {
@@ -49,40 +44,43 @@ describe("Login page", () => {
   });
 
   it("should login successful", async () => {
-    // render(<Login />);
-    const formData = { username: "aem2", password: "123" };
-
-    (userLogIn as jest.Mock).mockResolvedValueOnce(user);
-
-    const response = await authenticate(formData);
-    console.log(response);
-    
-
-    expect(response).toBe(user)
-    // const usernameInput = screen.getByPlaceholderText("Username");
-    // const passwordInput = screen.getByPlaceholderText("Password");
-    // const loginBtn = screen.getByTitle("Login");
-    // await userEvent.type(usernameInput, "aem2");
-    // await userEvent.type(passwordInput, "123");
-    // fireEvent.click(loginBtn);
-    // waitFor(async () => {
-    //   const res = await userLogIn({ username: "aem2", password: "123" });
-    //   expect(loginBtn).toBeDisabled();
-    //   expect(res.message).not.toBeTruthy();
-    //   expect(redirect).toHaveBeenCalledWith("/");
-    // });
+    render(<Register />);
+    const usernameInput = screen.getByPlaceholderText("Username");
+    const passwordInput = screen.getByPlaceholderText("Password");
+    const emailInput = screen.getByPlaceholderText(/email/i);
+    const registerBtn = screen.getByTitle("Login");
+    await userEvent.type(usernameInput, "aem2");
+    await userEvent.type(passwordInput, "123");
+    await userEvent.type(emailInput, "user@email.com");
+    fireEvent.click(registerBtn);
+    waitFor(async () => {
+      const res = await userRegister({
+        username: "user",
+        password: "123",
+        email: "user@email.com",
+      });
+      expect(registerBtn).toBeDisabled();
+      expect(res.message).not.toBeTruthy();
+      expect(redirect).toHaveBeenCalledWith("/");
+    });
   });
 
   it("should login failed", async () => {
-    render(<Login />);
+    render(<Register />);
     const usernameInput = screen.getByPlaceholderText("Username");
     const passwordInput = screen.getByPlaceholderText("Password");
-    const loginBtn = screen.getByTitle("Login");
-    await userEvent.type(usernameInput, "fail");
-    await userEvent.type(passwordInput, "fail");
-    fireEvent.click(loginBtn);
+    const emailInput = screen.getByPlaceholderText(/email/i);
+    const registerBtn = screen.getByTitle("Login");
+    await userEvent.type(usernameInput, "aem2");
+    await userEvent.type(passwordInput, "123");
+    await userEvent.type(emailInput, "aem2@email.com");
+    fireEvent.click(registerBtn);
     waitFor(async () => {
-      const res = await userLogIn({ username: "fail", password: "fail" });
+      const res = await userRegister({
+        username: "aem2",
+        password: "123",
+        email: "aem2@email.com",
+      });
       expect(res.message).toBeTruthy();
       expect(screen.getByText(/sorry/i)).toBeInTheDocument();
     });
