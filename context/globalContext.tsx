@@ -30,14 +30,15 @@ const defaultValues: {
 const GlobalContext = createContext(defaultValues);
 
 export const GlobalContextProvider = ({
+  initialCars,
   children,
 }: {
+  initialCars: Car[];
   children: React.ReactNode;
 }) => {
-  const [allCars, setAllCars] = useState<Car[]>([]);
+  const [allCars, setAllCars] = useState<Car[]>(initialCars);
   const [list, setList] = useState<Car[]>([]);
   const [pagerList, setPagerList] = useState<Car[]>([]);
-  const favorite = false;
 
   const updateFavorite = (carId: number) => {
     const updatedCars = allCars.map((car) =>

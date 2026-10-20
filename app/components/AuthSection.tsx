@@ -1,17 +1,16 @@
 "use client";
 
+import { userLogOut } from "@/lib/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { PiUserCircle } from "react-icons/pi";
-import Cookies from "universal-cookie";
 
 const AuthSection = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
-  const cookies = new Cookies();
-  const handleLogout = () => {
-    cookies.remove("csrf-token");
+  const handleLogout = async () => {
+    await userLogOut();
     router.push("/login");
     router.refresh();
   };

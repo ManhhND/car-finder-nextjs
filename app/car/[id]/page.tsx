@@ -1,8 +1,8 @@
-import { getCarDetail } from "@/app/api";
-import { Car } from "@/app/utils/interfaces";
 import { brands } from "@/app/utils/mappings";
+import { getCarDetail } from "@/lib/cars";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 const CarDetail = async ({
   params: { id },
@@ -11,9 +11,12 @@ const CarDetail = async ({
     id: string;
   };
 }) => {
-  const carData = await getCarDetail({ id });
-  let {
-    nid,
+  const car = await getCarDetail(id);
+  if (!car) {
+    notFound();
+  }
+
+  const {
     title,
     field_description,
     field_car_type,
@@ -23,8 +26,7 @@ const CarDetail = async ({
     field_image,
     field_price,
     field_brand,
-  }: Car = carData[0];
-  field_image = field_image.trim().replace("/\n/g", "");
+  } = car;
   const brand = brands.filter((brand) => brand.name === field_brand)[0];
 
   return (
@@ -33,7 +35,7 @@ const CarDetail = async ({
         <div className="hero-banner relative w-full text-white text-center bg-gray-4 aspect-5/2 md:px-8 px-4 pt-6 pb-4">
           <div className="flex flex-col mobile:flex-col-reverse mobile:items-start">
             <div className="text-right text-3xl font-bold">
-              {field_price} / <span className="text-lg">day</span>
+              ${field_price} / <span className="text-lg">day</span>
             </div>
             <h1 className="mb-2 text-5xl mobile:text-4xl font-black drop-shadow-lg md:mb-0">
               {title}
@@ -75,9 +77,11 @@ const CarDetail = async ({
             <div className="more-info text-lg font-bold flex-auto">
               <h3 className="pb-2">More info about {title}</h3>
               <div className="brand-logo relative h-6 aspect-2/1">
-                <Link href={brand?.website}>
-                  <Image src={brand?.logo} alt={`${field_brand}-logo`} />
-                </Link>
+                {brand && (
+                  <Link href={brand.website}>
+                    <Image src={brand.logo} alt={`${field_brand}-logo`} />
+                  </Link>
+                )}
               </div>
             </div>
           </div>

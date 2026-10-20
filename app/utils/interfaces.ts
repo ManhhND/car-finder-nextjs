@@ -5,7 +5,7 @@ export interface Car {
   field_car_type: string;
   field_capacity: number;
   field_steering: string;
-  field_gasoline: boolean;
+  field_gasoline: string;
   field_image: string;
   field_price: number;
   field_brand: string;
