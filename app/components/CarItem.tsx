@@ -23,7 +23,6 @@ const CarItem = ({
   listTitle,
 }: Car & { listTitle: string }) => {
   const { updateFavorite } = useGlobalContext();
-  field_image = field_image.trim().replace("/\n/g", "");
 
   return (
     <>
@@ -72,7 +71,7 @@ const CarItem = ({
         </div>
         <div className="action-section flex justify-between items-center">
           <div className="font-bold text-xl">
-            {field_price}/{" "}
+            ${field_price}/{" "}
             <span className="text-gray-5 font-normal text-base">day</span>
           </div>
           <Link

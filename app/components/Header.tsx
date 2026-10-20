@@ -3,16 +3,15 @@ import { Lato } from "next/font/google";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import { getAllCars } from "../api";
+import { Car } from "@/app/utils/interfaces";
+import { getSession } from "@/lib/session";
 import AuthSection from "./AuthSection";
 import SearchBar from "./SearchBar";
 
 const logoFont = Lato({ weight: "700", subsets: ["latin"] });
 
-const Header = async () => {
-  const allCars = await getAllCars();
-  const cookieStore = cookies();
-  const isLoggedIn = cookieStore.has("csrf-token");
+const Header = async ({ allCars }: { allCars: Car[] }) => {
+  const isLoggedIn = !!(await getSession(cookies()));
 
   return (
     <header className="bg-white">

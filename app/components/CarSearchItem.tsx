@@ -16,8 +16,6 @@ const CarSearchItem = ({
 }: Car & {
   onStopSearching: () => void;
 }) => {
-  field_image = field_image.trim().replace("/\n/g", "");
-
   return (
     <>
       <li className="list-none bg-white p-4">

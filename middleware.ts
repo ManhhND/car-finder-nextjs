@@ -1,9 +1,10 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { getSession } from "./lib/session";
 
-const middleware = (req: NextRequest) => {
+const middleware = async (req: NextRequest) => {
   const { pathname, origin } = req.nextUrl;
-  const isLoggedIn = req.cookies.has("csrf-token");
+  const isLoggedIn = !!(await getSession(req.cookies));
 
   if (
     !isLoggedIn &&
@@ -16,6 +17,12 @@ const middleware = (req: NextRequest) => {
     const homeUrl = new URL("/", origin);
     return NextResponse.redirect(homeUrl.toString());
   }
+};
+
+export const config = {
+  matcher: [
+    "/((?!api|_next/static|_next/image|cars/|favicon.ico|.*\\.svg$).*)",
+  ],
 };
 
 export default middleware;

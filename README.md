@@ -22,6 +22,8 @@ Install packages (Node version used: `v20.3.1`):
 npm install
 ```
 
+Optionally copy `.env.example` to `.env.local` and fill it in (see [Environment variables](#environment-variables)). Without it, the app runs locally with a development-only secret.
+
 Start project:
 
 ```
@@ -40,18 +42,32 @@ npm run dev
   - Favorite cars page `/favorite-cars`: displays user's favorite cars as list
 
 - It has a search box at page header so user can filter cars by name
-- Authentication flow: home page and car detail page are restricted, anonymous users go to these pages will be redirected to login page for authentication. If they didn't have an account yet, they can register a new one at register page. After finishing the registration, an email will be sent to user for email address verification. When user click on the link in the email, their account will be activated and ready to use, user will also be redirect back to CarFinder website.
-- Backend APIs for cars fetching, user login and user registration is being served by a Drupal site I created and hosted on [Pantheon](https://dashboard.pantheon.io/)
-- **Note**: Favorite cars doesn't include backed function. Favorite data will be lost after page refreshing
+- Authentication flow: home page, car detail page and favorite cars page are restricted. Anonymous users are redirected to the login page. Log in with the demo account shown on the login page, or register a new account, which signs you in straight away.
+- Car data is bundled with the app (`data/cars.json`, images in `public/cars/`). Login, registration and logout are handled by Next.js Route Handlers in `app/api/auth/`. Sessions are signed JWTs stored in an httpOnly cookie, so the app needs no database and runs entirely on Vercel.
+- **Note**: There is no user store. Only the demo account can log in; a registered account works until you log out or the session expires (7 days). Favorite cars are kept in memory and are lost after a page refresh.
+- The original backend was a Drupal site on Pantheon, which is no longer available.
 - Icons brought to you by React icons library
 - Using Yup, react-hook-form libraries to handle form validation
-- Using universal-cookie library to handle cookie on client components
+- Using jose to sign and verify session cookies
+
+# Environment variables
+
+| Name            | Required      | Description                                                                   |
+| --------------- | ------------- | ----------------------------------------------------------------------------- |
+| `AUTH_SECRET`   | In production | Secret used to sign session cookies. Generate with `openssl rand -base64 32`. |
+| `DEMO_USERNAME` | No            | Demo account username. Defaults to `demo`.                                    |
+| `DEMO_PASSWORD` | No            | Demo account password. Defaults to `Demo@1234`.                               |
+
+# Deploy to Vercel
+
+1. Import the repository in Vercel (framework preset: Next.js).
+2. Add `AUTH_SECRET` in Project Settings → Environment Variables for Production and Preview.
+3. Deploy. No other services are needed.
 
 # References
 
 - Next.js (https://nextjs.org/)
 - TypeScript (https://www.typescriptlang.org/)
 - Tailwind CSS (https://tailwindcss.com/)
-- Pantheon (https://pantheon.io/)
-- Drupal (https://drupal.org/)
+- jose (https://github.com/panva/jose)
 - React Icons (https://react-icons.github.io/react-icons/)
